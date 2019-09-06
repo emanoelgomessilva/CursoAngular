@@ -1,3 +1,4 @@
+<app-titulo [titulo]='titulo'></app-titulo>
 <div class="d-flex">
 <div class="form-inline mr-auto">
   <div>
@@ -35,7 +36,7 @@
     <tr *ngFor="let evento of eventosFiltrados">
       <td *ngIf="mostrarImagem">
         <img 
-          src="https://localhost:44391/img/{{evento.imagemUrl}}"
+          src="https://localhost:44391/Resources/Images/{{evento.imagemUrl}}"
           [style.width.px]="larguraImagem"
           [style.margin.px]="margemImagem"
         >
@@ -43,7 +44,7 @@
       <td>{{evento.id}}</td>
       <td>{{evento.tema}}</td>
       <td>{{evento.local}}</td>
-      <td>{{evento.dataEvento | DateTimeFormatPipe}}</td>
+      <td>{{evento.dataEvento}}</td>
       <td>{{evento.qtdPessoas}}</td>
       <td>
         <div *ngIf="!evento.lotes.length">
@@ -65,7 +66,7 @@
       </td>
     </tr>
   </tbody>
-  <tfoot *ngIf="!eventos.length">
+  <tfoot *ngIf="!eventos">
     <tr>
       <td colspan="7" class="text-center">
         <h4>Nenhum item encontrado!</h4>
@@ -117,6 +118,8 @@
               <label>Data e Hora</label>
               <input type="text" class="form-control"
                 bsDatepicker
+                value={{dataEvento|DateTimeFormatPipe}}
+                [(ngModel)] = "dataEvento"
                 [bsConfig]="{ dateInputFormat : 'DD/MM/YYYY hh:mm a' }"
                 [ngClass]="{'is-invalid': registerForm.get('dataEvento').errors && registerForm.get('dataEvento').touched}"
               formControlName = "dataEvento">
@@ -140,7 +143,8 @@
             </div>
             <div class="form-group col-md-9">
               <label>Imagem</label>
-              <input type="text" class="form-control is-invalid"
+              <button class = "btn btn-success" (click)="file.click()"></button>
+              <input type="file" #file class="form-control is-invalid"
                 [ngClass]="{'is-invalid': registerForm.get('imagemUrl').errors && registerForm.get('imagemUrl').touched}"
               formControlName = "imagemUrl">
               <div class = "invalid-feedback">
@@ -210,7 +214,3 @@
   		</div>
 	</div>
 </div>
-
-
-
-
