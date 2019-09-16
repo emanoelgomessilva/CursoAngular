@@ -23,7 +23,7 @@
           <input class="form-control" type="text" formControlName="email"
             [ngClass]="{ 'is-invalid': registerForm.get('email').errors && 
                                        registerForm.get('email').touched}"
-            placeholder="Insira o Nome Completo"/>
+            placeholder="Insira o email"/>
           <div *ngIf="registerForm.get('email').hasError('required') &&
                       registerForm.get('email').touched"
             class="invalid-feedback">
